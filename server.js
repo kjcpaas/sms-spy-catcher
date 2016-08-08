@@ -1,13 +1,16 @@
-var express = require('express')
+var WebpackDevServer = require("webpack-dev-server")
+var webpackConfig = require("./webpack.config.js")
+var webpack = require("webpack");
 
-var app = new express()
 var port = 8020
+var compiler = webpack(webpackConfig)
 
-app.get('/', function(req, res) {
-   res.sendFile(__dirname + '/public/index.html')
+var server = new WebpackDevServer(compiler, {
+  hot: true,
+  contentBase: './public'
 })
 
-app.listen(port, function(error) {
+server.listen(port, 'localhost', function(error) {
   if (error) {
     console.error(error)
   } else {
