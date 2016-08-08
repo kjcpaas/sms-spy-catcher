@@ -1,27 +1,26 @@
 var webpack = require('webpack')
 var path = require('path')
 
-var BUILD_DIR = path.join(__dirname, 'public')
-var APP_DIR = path.join(__dirname, 'app');
-
 var config = {
-  entry: {
-    app: 'app.jsx'
-  },
+  entry: [
+    path.join(__dirname, 'app/app.jsx')
+  ],
   output: {
-    path: BUILD_DIR,
+    path: path.join(__dirname, 'public'),
     filename: 'app.js'
   },
   module: {
     loaders: [
       { test: /\.js$/,                   loaders: ['babel?cacheDirectory', 'strict'], exclude: /node_modules/ },
       { test: /\.jsx$/,                  loaders: ['babel?cacheDirectory', 'strict'], exclude: /node_modules/ },
-    ],
+    ]
   },
   resolve: {
     root: [
       path.join(__dirname, 'app')
-    ]
+    ],
+    extensions: ['', '.js', '.jsx'],
+    externals: ['node_modules/']
   }
 }
 

@@ -1,11 +1,13 @@
 import React from 'react'
-import {render} from 'react-dom'
+import { render } from 'react-dom'
+import SMSContainer from './components/SMSContainer'
 
 class App extends React.Component {
   render () {
     return (
       <div>
-        No spied SMS yet. Please try sending one.
+        <h1>SMS Spy Catcher</h1>
+        <SMSContainer />
       </div>
     )
   }
