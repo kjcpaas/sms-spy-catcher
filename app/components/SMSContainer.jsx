@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import SockJS from 'sockjs-client'
+import SMSList from './SMSList'
 
 export default class SMSContainer extends React.Component {
   constructor (props) {
@@ -14,7 +15,7 @@ export default class SMSContainer extends React.Component {
   componentDidMount () {
     this.sock = new SockJS('http://localhost:9999/ws')
     this.sock.onopen = () => {
-      console.log("Listening to SMS")
+      this.setState({connected: true})
     }
 
     this.sock.onerror = (error) => {
@@ -43,16 +44,14 @@ export default class SMSContainer extends React.Component {
   }
 
   render () {
-    var { smsList } = this.state
+    var { smsList, connected } = this.state
 
-    if(smsList && smsList.length) {
-      return <div />
+    if (!connected) {
+      return <div>
+        Connecting websockets port...
+      </div>
     } else {
-      return (
-        <div>
-          The spy hasn't intercepted any SMS yet
-        </div>
-      )
+      return <SMSList list={smsList} />
     }
   }
 }

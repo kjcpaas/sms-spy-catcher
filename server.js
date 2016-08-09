@@ -29,13 +29,19 @@ var sockjs = SockJS.createServer({ sockjs_url: 'http://cdn.jsdelivr.net/sockjs/1
 
 var handlers = {
   sms: (socket, data) => {
-    socket.write()
+    console.info("======================================")
+    console.info("Message received:")
+    console.info("From: " + data.from)
+    console.info("Body: " + data.body)
+    console.info("======================================")
   }
 }
 
 sockjs.on('connection', (socket) => {
   console.info('socket connected')
 
+  // This is just test message
+  // TODO: send actual message from SMS spy
   var test = JSON.stringify({
     type: 'sms',
     data: {
