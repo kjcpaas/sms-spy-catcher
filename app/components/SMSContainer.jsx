@@ -13,7 +13,7 @@ export default class SMSContainer extends React.Component {
   }
 
   componentDidMount () {
-    this.sock = new SockJS('http://localhost:9999/ws')
+    this.sock = new SockJS('http://localhost:8020/ws')
     this.sock.onopen = () => {
       this.setState({connected: true})
     }
